@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        /* General styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111; /* Dark background */
+            color: white;
+            background-image: url('images/bg18.jpg'); /* Add your background image */
+            background-size: cover; /* Ensures the image covers the entire body */
+            background-position: top; /* Centers the image */
+            background-attachment: fixed; /* Keeps the background fixed when scrolling */
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* Transparent background */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between image and text */
+        }
+
+        nav .logo-container img {
+            height: 40px;
+        }
+
+        nav .logo-container .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        nav ul li a:hover {
+            opacity: 1;
+        }
+
+        /* About Us Section */
+        .about {
+            padding: 120px 20px 40px; /* Top padding to avoid overlap with navbar */
+            text-align: center;
+        }
+
+        .about h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .about .content {
+            display: grid;
+            grid-template-columns: 1fr; /* Stack each item vertically */
+            gap: 40px;
+            margin-top: 40px;
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+
+        .about .content .item {
+            display: flex;
+            align-items: center;
+            gap: 20px; /* Space between image and text */
+        }
+
+        .about .content .item img {
+            width: 50%; /* Adjusts image width */
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .about .content .item .text {
+            background-color: white; /* White box for text */
+            color: black; /* Text color inside the box */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            max-width: 800px;
+            font-size: 1.2em;
+            text-align: left; /* Align text to the left */
+        }
+
+        /* Alternate layout for odd rows */
+        .about .content .item:nth-child(odd) {
+            flex-direction: row-reverse; /* Swap image and text positions */
+        }
+      /* Slider Section */
+      .slider {
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 600px;
+            max-width: 750px;
+            border-radius: 8px;
+        }
+
+        .slider .description {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        .slider .navigation {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .slider .navigation div {
+            width: 10px;
+            height: 10px;
+            margin: 5px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .slider .navigation div.active {
+            background: red;
+        }
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: #aaa;
+            margin-top: 40px;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #4caf50;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid white;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+            background-color: white;
+            color: black;
+        }
+        footer a {
+            color: #4caf50;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo-container">
+            <img src="images/logo.png" alt="Logo"> <!-- Replace with your logo image -->
+            <span class="logo-text">Snap4u</span> <!-- Add your logo name -->
+        </div>
+        <ul>
+            <li><a href="home.php">Home</a></li>
+            <li><a href="Aboutus.php">About us</a></li>
+            <li><a href="gallery.php">Gallery</a></li>
+            <li><a href="package.php">Package</a></li>
+            <li><a href="contact.php">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- About Us Section -->
+    <section class="about">
+        <h1>About Us</h1>
+
+        <div class="content">
+            <!-- Row 1: Establishment -->
+            <div class="item">
+                <img src="images/ab1.jpg" alt="Capture Photography Establishment">
+                <div class="text">
+                    <h3>Established Since 2015</h3>
+                    <p>Snap4u Photography was born out of a passion for capturing life’s finest moments and transforming them into everlasting memories. Since 2015, we’ve been a trusted name in the photography industry, consistently delivering excellence through cutting-edge equipment, artistic vision, and impeccable service. From weddings and corporate events to personal portraits and family gatherings, our dedication to quality ensures every shot is worth cherishing forever.</p>
+                </div>
+            </div>
+
+            <!-- Row 2: Mission -->
+            <div class="item">
+                <img src="images/ab2.jpg" alt="Capture Photography Mission">
+                <div class="text">
+                    <h3>Our Mission</h3>
+                    <p>At Snap4u Photography, our mission is simple yet powerful: to create magic through the lens. We aim to capture moments that resonate, inspire, and speak volumes. By combining professionalism with a personal touch, we ensure that every project is tailored to meet and exceed your expectations. Whether it’s a large-scale event or an intimate photoshoot, we strive to make every experience exceptional, memorable, and stress-free.</p>
+                </div>
+            </div>
+
+            <!-- Row 3: Vision -->
+            <div class="item">
+                <img src="images/ab3.jpg" alt="Capture Photography Vision">
+                <div class="text">
+                    <h3>Our Vision</h3>
+                    <p>Our vision is to redefine the art of photography on a global scale. We aspire to be pioneers in creative storytelling, seamlessly blending technology with artistry to craft visuals that leave an indelible mark. With a commitment to innovation, diversity, and customer satisfaction, Snap4u Photography is dedicated to setting industry benchmarks and becoming a household name synonymous with timeless beauty and quality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slider Section -->
+    <section class="slider">
+        <div class="slides">
+            <div class="slide">
+                <img src="images/sl1.gif" alt="Wedding Photography">
+                <div class="description">“Photography is the story I fail to put into words.” – Destin Sparks</div>
+            </div>
+            <div class="slide">
+                <img src="images/sl2.gif" alt="Corporate Events">
+                <div class="description">“A photograph is a secret about a secret. The more it tells you, the less you know.” – Diane Arbus</div>
+            </div>
+            <div class="slide">
+                <img src="images//sl3.gif" alt="Family Portraits">
+                <div class="description">“To me, photography is an art of observation. It’s about finding something interesting in an ordinary place.” – Elliott Erwitt</div>
+            </div>
+            <div class="slide">
+                <img src="images/sl4.gif" alt="Nature Photography">
+                <div class="description">“In photography, there is a reality so subtle that it becomes more real than reality.” – Alfred Stieglitz</div>
+            </div>
+        </div>
+        <div class="navigation">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </section>
+
+  
+    <!-- Footer -->
+    <footer>
+        &copy; <?php echo date("Y"); ?> Snap4u Photography Studio. All rights reserved.
+        <br>
+        <a href="https://www.instagram.com/zidvnismv/" target="_blank">Our Instagram</a>
+    </footer>
+
+    <script>
+        const slides = document.querySelector('.slides');
+        const dots = document.querySelectorAll('.dot');
+        let index = 0;
+
+        function showSlide(i) {
+            index = (i + dots.length) % dots.length;
+            slides.style.transform = `translateX(${-index * 100}%)`;
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[index].classList.add('active');
+        }
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => showSlide(i));
+        });
+
+        setInterval(() => showSlide(index + 1), 5000);
+    </script>
+</body>
+</html>

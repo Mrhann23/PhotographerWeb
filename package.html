@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packages</title>
+    <style>
+        /* General styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('images/bpc.gif') no-repeat center center fixed; /* Add background image */
+            background-size: cover;
+            color: white;
+        }
+
+     /* Navigation Bar Styles */
+     nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* Transparent background */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between image and text */
+        }
+
+        nav .logo-container img {
+            height: 40px;
+        }
+
+        nav .logo-container .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        nav ul li a:hover {
+            opacity: 1;
+        }
+
+        /* Packages Section */
+        .packages {
+            padding: 120px 20px 40px; /* Top padding to avoid overlap with navbar */
+            text-align: center;
+        }
+
+        .packages h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .package-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .package-card {
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+            color: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .package-card.vip {
+            background-color: #D4AF37; /* Gold */
+        }
+
+        .package-card.basic {
+            background-color: #E2725B; /* Terracotta */
+        }
+
+        .package-card.special {
+            background-color: #6B8E23; /* Olive Green */
+        }
+
+        .package-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+        }
+
+        .package-card h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .package-card p.price {
+            font-size: 1.5em;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .package-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .package-card ul li {
+            margin: 10px 0;
+            text-align: left;
+        }
+
+        .package-card img {
+            width: 100%; /* Ensure consistent image size */
+            height: 200px; /* Fixed height */
+            object-fit: cover; /* Crop image to fit dimensions */
+            border-radius: 8px;
+        }
+
+        .package-card .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .package-card .btn:hover {
+            background-color: black;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: #222;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            color: white;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .modal-content img {
+            width: 100%; /* Ensure consistent modal image size */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 10px;
+        }
+
+        .modal-content ul {
+            text-align: left;
+            list-style: none;
+        }
+
+        .close-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .close-btn:hover {
+            background-color: #388e3c;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: #aaa;
+            margin-top: 40px;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #4caf50;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid white;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+    <div class="logo-container">
+            <img src="images/logo.png" alt="Logo"> <!-- Replace with your logo image -->
+            <span class="logo-text">Snap4u</span> <!-- Add your logo name -->
+        </div>
+        <ul>
+            <li><a href="home.php">Home</a></li>
+            <li><a href="aboutus.php">About us</a></li>
+            <li><a href="gallery.php">Gallery</a></li>
+            <li><a href="package.php">Package</a></li>
+            <li><a href="contact.php">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Packages Section -->
+    <section class="packages">
+        <h1>Photography Packages</h1>
+        <div class="package-cards">
+            <div class="package-card vip">
+                <img src="images/p1.jpg" alt="VIP Package">
+                <h2>VIP Package</h2>
+                <p class="price">RM 5,000</p>
+                <ul>
+                    <li>Full-day photography</li>
+                    <li>Unlimited photo edits</li>
+                    <li>Premium album (50 pages)</li>
+                    <li>Drone photography included</li>
+                </ul>
+                <button class="btn" onclick="showModal('vip')">Learn More</button>
+            </div>
+            <div class="package-card basic">
+                <img src="images/p2.jpg" alt="Basic Package">
+                <h2>Basic Package</h2>
+                <p class="price">RM 1,500</p>
+                <ul>
+                    <li>4 hours of photography</li>
+                    <li>30 edited photos</li>
+                    <li>Standard album (20 pages)</li>
+                    <li>Online gallery access</li>
+                </ul>
+                <button class="btn" onclick="showModal('basic')">Learn More</button>
+            </div>
+            <div class="package-card special">
+                <img src="images/p0.jpg" alt="Special Package">
+                <h2>Special Package</h2>
+                <p class="price">RM 3,000</p>
+                <ul>
+                    <li>8 hours of photography</li>
+                    <li>50 edited photos</li>
+                    <li>Deluxe album (30 pages)</li>
+                    <li>Free pre-event shoot</li>
+                </ul>
+                <button class="btn" onclick="showModal('special')">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <div id="vip" class="modal">
+        <div class="modal-content">
+            <img src="images/pc1.jpg" alt="VIP Package">
+            <h2>VIP Package</h2>
+            <p>RM 5,000</p>
+            <ul>
+                <li>Full-day photography</li>
+                <li>Unlimited photo edits</li>
+                <li>Premium album (50 pages)</li>
+                <li>Drone photography included</li>
+            </ul>
+            <button class="close-btn" onclick="closeModal('vip')">Close</button>
+        </div>
+    </div>
+
+    <div id="basic" class="modal">
+        <div class="modal-content">
+            <img src="images/p2.jpg" alt="Basic Package">
+            <h2>Basic Package</h2>
+            <p>RM 1,500</p>
+            <ul>
+                <li>4 hours of photography</li>
+                <li>30 edited photos</li>
+                <li>Standard album (20 pages)</li>
+                <li>Online gallery access</li>
+            </ul>
+            <button class="close-btn" onclick="closeModal('basic')">Close</button>
+        </div>
+    </div>
+
+    <div id="special" class="modal">
+        <div class="modal-content">
+            <img src="images/p0.jpg" alt="Special Package">
+            <h2>Special Package</h2>
+            <p>RM 3,000</p>
+            <ul>
+                <li>8 hours of photography</li>
+                <li>50 edited photos</li>
+                <li>Deluxe album (30 pages)</li>
+                <li>Free pre-event shoot</li>
+            </ul>
+            <button class="close-btn" onclick="closeModal('special')">Close</button>
+        </div>
+    </div>
+
+   <!-- Footer -->
+   <footer>
+        &copy; <?php echo date("Y"); ?> Snap4u Photography Studio. All rights reserved.
+        <br>
+        <a href="https://www.instagram.com/zidvnismv/" target="_blank">Our Instagram</a>
+    </footer>
+
+    <script>
+        function showModal(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+    </script>
+</body>
+</html>

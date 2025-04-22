@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photographer View</title>
+    <style>
+        /* General styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111; /* Dark background */
+            color: white;
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* Transparent background */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between image and text */
+        }
+
+        nav .logo-container img {
+            height: 40px;
+        }
+
+        nav .logo-container .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        nav ul li a:hover {
+            opacity: 1;
+        }
+
+        /* Header section */
+        header {
+            text-align: center;
+            padding: 100px 20px 20px; /* Add padding to avoid overlap with the navbar */
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid #444;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: #aaa;
+        }
+
+        /* Gallery section */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 400px; /* Set a fixed height for uniformity */
+            object-fit: cover; /* Ensures consistent scaling */
+            border-radius: 10px;
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            transition: opacity 0.3s;
+            border-radius: 10px;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        /* About section */
+        .about {
+            padding: 40px 20px;
+            text-align: center;
+            background: #222;
+            margin-top: 20px;
+        }
+
+        .about h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .about p {
+            font-size: 1.2em;
+            color: #bbb;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: #aaa;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #4caf50;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid white;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+            background-color: white;
+            color: black;
+        }
+
+
+        /* Slider Styles */
+        .slider {
+            position: relative;
+            max-width: 100%;
+            margin: 40px auto;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 400px; /* Consistent height */
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%; /* Ensures same height */
+            object-fit: cover;
+        }
+
+        .slider .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .slider .arrow-left {
+            left: 10px;
+        }
+
+        .slider .arrow-right {
+            right: 10px;
+        }
+
+        /* Button styles for each image */
+        .slider-button-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .slider-button {
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .slider-button:hover {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo-container">
+            <img src="images/logo.png" alt="Logo"> <!-- Replace with your logo image -->
+            <span class="logo-text">Snap4u</span> <!-- Add your logo name -->
+        </div>
+        <ul>
+            <li><a href="home.php">Home</a></li>
+            <li><a href="Aboutus.php">About us</a></li>
+            <li><a href="gallery.php">Gallery</a></li>
+            <li><a href="package.php">Package</a></li>
+            <li><a href="contact.php">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Line Up Snap4u Photographer</h1>
+        <p>Specializing in fashion, convocation, and wedding photographer</p>
+    </header>
+
+    <!-- Image Slider Section -->
+   
+    <section class="slider">
+        <div class="slides">
+            <div class="slide">
+                <img src="images/r1.jpeg" alt="Photo 1">
+                <div class="slider-button-container">
+                    <a href="Aboutus.php" class="slider-button">About Us</a>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="images/r2.jpeg" alt="Photo 2">
+                <div class="slider-button-container">
+                    <a href="gallery.php" class="slider-button">View Gallery</a>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="images/r3.jpeg" alt="Photo 3">
+                <div class="slider-button-container">
+                    <a href="photographer.php" class="slider-button">View Photographers</a>
+                </div>
+            </div>
+        </div>
+        <button class="arrow arrow-left" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="arrow arrow-right" onclick="moveSlide(1)">&#10095;</button>
+    </section>
+<!-- Gallery Section -->
+<section class="gallery">
+        <div class="gallery-item">
+            <img src="images/pv6.jpg" alt="Photo 1">
+            <div class="overlay">John Lennon</div>
+        </div>
+        <div class="gallery-item">
+            <img src="images/pv1.jpg" alt="Photo 2">
+            <div class="overlay">Astrallia</div>
+        </div>
+        <div class="gallery-item">
+            <img src="images/pv7.jpg" alt="Photo 3">
+            <div class="overlay">Gerald Malique</div>
+        </div>
+        <div class="gallery-item">
+            <img src="images/pv3.jpg" alt="Photo 4">
+            <div class="overlay">Asyraf</div>
+        </div>
+        <div class="gallery-item">
+            <img src="images/pv4.jpg" alt="Photo 5">
+            <div class="overlay">Sofea</div>
+        </div>
+        <div class="gallery-item">
+            <img src="images/pv5.jpg" alt="Photo 6">
+            <div class="overlay">Michael Ang</div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <h2>About Team</h2>
+        <p>
+            We're from Snap4u, a passionate photographer who loves capturing the beauty of life, 
+            one frame at a time. With years of experience in fashion, convocation, and wedding 
+            photography, I believe in creating timeless art through my lens. Let’s work together to 
+            bring your vision to life.
+        </p>
+    </section>
+
+  <!-- Footer -->
+  <footer>
+        &copy; <?php echo date("Y"); ?> Snap4u Photography Studio. All rights reserved.
+        <br>
+        <a href="https://www.instagram.com/zidvnismv/" target="_blank">Our Instagram</a>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+
+        function moveSlide(step) {
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+            currentSlide = (currentSlide + step + totalSlides) % totalSlides; // Keep slide index in range
+
+            const slidesContainer = document.querySelector('.slides');
+            slidesContainer.style.transform = 'translateX(' + (-100 * currentSlide) + '%)';
+        }
+    </script>
+</body>
+</html>

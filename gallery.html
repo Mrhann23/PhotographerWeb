@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <style>
+        /* General styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('images/bgc.jpg') no-repeat center center fixed; /* Add background image */
+            background-size: cover;
+            color: white;
+        }
+
+/* Navigation Bar Styles */
+nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* Transparent background */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between image and text */
+        }
+
+        nav .logo-container img {
+            height: 40px;
+        }
+
+        nav .logo-container .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        nav ul li a:hover {
+            opacity: 1;
+        }
+        /* Gallery Section */
+        .gallery {
+            padding: 120px 20px 40px; /* Top padding to avoid overlap with navbar */
+            text-align: center;
+        }
+
+        .gallery h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        /* Grid layout for categories */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+            gap: 30px;
+            margin-bottom: 40px;
+            justify-items: center;
+        }
+
+        .category {
+            background: #222;
+            padding: 20px;
+            border-radius: 8px;
+            width: 280px; /* Increased width for larger images */
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .category:hover {
+            background: white; /* Green hover effect for categories */
+        }
+
+        .category img {
+            width: 100%;
+            height: 200px; /* Increased height for larger images */
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: #aaa;
+            margin-top: 40px;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #4caf50;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid white;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+            background-color: white;
+            color: black;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+         <div class="logo-container">
+            <img src="images/logo.png" alt="Logo"> <!-- Replace with your logo image -->
+            <span class="logo-text">Snap4u</span> <!-- Add your logo name -->
+        </div>
+        <ul>
+            <li><a href="home.php">Home</a></li>
+            <li><a href="Aboutus.php">About us</a></li>
+            <li><a href="gallery.php">Gallery</a></li>
+            <li><a href="package.php">Package </a></li>
+            <li><a href="contact.php">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <h1>Gallery</h1>
+
+        <div class="categories">
+            
+            <a href="catalog.php" class="category"> 
+                <img src="images/pv3.jpg" alt="Asyraf">
+                <h3>Asyraf</h3>
+            </a>
+
+          
+            <a href="catalog.php" class="category"> 
+                <img src="images/pv4.jpg" alt="Sofea">
+                <h3>Sofea</h3>
+            </a>
+
+            
+            <a href="catalog.php" class="category"> 
+                <img src="images/pv5.jpg" alt="Michael Ang">
+                <h3>Michael Ang</h3>
+            </a>
+
+     
+            <a href="catalog.php" class="category"> 
+                <img src="images/pv6.jpg" alt="John Lennon">
+                <h3>John Lennon</h3>
+            </a>
+
+         
+            <a href="catalog.php" class="category"> 
+                <img src="images/pv1.jpg" alt="Astrallia">
+                <h3>Astrallia</h3>
+            </a>
+
+          
+            <a href="catalog.php" class="category"> 
+                <img src="images/pv7.jpg" alt="Gerald Malique">
+                <h3>Gerald Malique</h3>
+            </a>
+        </div>
+    </section>
+<!-- Footer -->
+<footer>
+        &copy; <?php echo date("Y"); ?> Snap4u Photography Studio. All rights reserved.
+        <br>
+        <a href="https://www.instagram.com/zidvnismv/" target="_blank">Our Instagram</a>
+    </footer>
+
+</body>
+</html>
